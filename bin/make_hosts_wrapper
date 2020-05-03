@@ -1,6 +1,8 @@
 #!/bin/sh
 set -ex
-mkdir -p -- ~/lib ~/etc && cp /lib/x86_64-linux-gnu/libnss_files.so.2 ~/lib
-perl -pi -e "s:/etc/hosts:${HOME}/etc/hosts:g" ~/lib/libnss_files.so.2
-cp /etc/hosts "${HOME}/etc/hosts"
-echo 10.255.128.3 metadata.google.internal metadata >> "${HOME}/etc/hosts"
+sudo mkdir -p /tfk
+sudo chown $USER:$USER /tfk
+mkdir -p -- /tfk/lib && cp /lib/x86_64-linux-gnu/libnss_files.so.2 /tfk/lib
+perl -pi -e "s:/etc/hosts:/tfk/hosts:g" /tfk/lib/libnss_files.so.2
+cp /etc/hosts /tfk/hosts
+echo 10.255.128.3 metadata.google.internal metadata >> /tfk/hosts
